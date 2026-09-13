@@ -1,0 +1,43 @@
+function doPost(e) {
+  // Bấm nút "Run" trong trình soạn để test sẽ luôn báo lỗi ở dòng này vì
+  // không có "e" thật — chỉ gọi được doPost bằng cách POST tới URL /exec
+  // sau khi đã Triển khai (Deploy). Đây là cách kiểm tra đúng, không phải chạy nút Run.
+  if (!e || !e.postData) {
+    return ContentService.createTextOutput(JSON.stringify({ok:false,error:'no postData — must call via deployed web app URL, not Run button'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var ma = (data.ma || '').toString().trim().toLowerCase();
+    var loiChuc = (data.loi_chuc || '').toString().trim();
+    if (!ma || !loiChuc) {
+      return ContentService.createTextOutput(JSON.stringify({ok:false,error:'missing ma or loi_chuc'}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    var ss = SpreadsheetApp.openById('1hGbvLvaqIb6AZ8hXIcubp4t8tz70TIfxBCiqnxtfjwk');
+    var sheet = ss.getSheetByName('Khách mời');
+    var values = sheet.getDataRange().getValues();
+    var header = values[0];
+    var maCol = header.indexOf('ma');
+    var wishCol = header.indexOf('loi_chuc_tu_khach');
+    if (maCol === -1 || wishCol === -1) {
+      return ContentService.createTextOutput(JSON.stringify({ok:false,error:'column not found'}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    for (var i = 1; i < values.length; i++) {
+      if ((values[i][maCol] || '').toString().trim().toLowerCase() === ma) {
+        sheet.getRange(i + 1, wishCol + 1).setValue(loiChuc);
+        return ContentService.createTextOutput(JSON.stringify({ok:true}))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    return ContentService.createTextOutput(JSON.stringify({ok:false,error:'guest not found'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
+  }
+}
