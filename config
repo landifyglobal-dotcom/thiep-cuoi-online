@@ -1,0 +1,5 @@
+Host github-landify
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_landify
+  IdentitiesOnly yes

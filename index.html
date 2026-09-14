@@ -656,7 +656,11 @@ function autoScrollToEnd(){
   if(dist<=40) return;
   const duration=Math.min(40000,Math.max(15000,dist/90*1000));
   let cancelled=false;
-  const cancel=()=>cancelled=true;
+  const html=document.documentElement;
+  const prevBehavior=html.style.scrollBehavior;
+  html.style.scrollBehavior="auto";
+  const finish=()=>{ html.style.scrollBehavior=prevBehavior; evs.forEach(ev=>removeEventListener(ev,cancel)); };
+  const cancel=()=>{ cancelled=true; finish(); };
   const evs=["wheel","touchstart","pointerdown","keydown"];
   evs.forEach(ev=>addEventListener(ev,cancel,{passive:true,once:true}));
   const t0=performance.now();
@@ -664,7 +668,7 @@ function autoScrollToEnd(){
     if(cancelled) return;
     const t=Math.min(1,(now-t0)/duration);
     scrollTo(0,startY+dist*t);
-    if(t<1) requestAnimationFrame(step); else evs.forEach(ev=>removeEventListener(ev,cancel));
+    if(t<1) requestAnimationFrame(step); else finish();
   })(t0);
 }
 function reveals(){
