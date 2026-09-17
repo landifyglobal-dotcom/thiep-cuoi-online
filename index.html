@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#14512F">
 <title>Thiệp mời — Hoàng Phi &amp; Kiều My</title>
+<meta name="description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Thiệp mời — Hoàng Phi & Kiều My">
+<meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta property="og:url" content="https://nhatrai.hoangphi-kieumy.site/">
+<meta property="og:image" content="https://nhatrai.hoangphi-kieumy.site/anh/1.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1066">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thiệp mời — Hoàng Phi & Kiều My">
+<meta name="twitter:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta name="twitter:image" content="https://nhatrai.hoangphi-kieumy.site/anh/1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Be+Vietnam+Pro:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -249,23 +261,6 @@ a{color:inherit}
   border:1px solid var(--ink);margin-top:8px}
 .tl .lb{font-size:13.5px}
 
-/* ═══ 8 nhạc ═══ */
-.tracks{max-width:340px;margin:0 auto;text-align:left}
-.tk{display:flex;align-items:center;gap:13px;width:100%;padding:13px 10px;
-  background:none;border:0;border-bottom:1px solid var(--hair);text-align:left}
-.tk:last-child{border-bottom:0}
-.tk:hover{background:var(--mint)}
-.tk .ix{font-family:"EB Garamond",serif;font-size:13px;color:var(--leaf);width:20px;flex:none}
-.tk .mt{flex:1;min-width:0}
-.tk .mt b{display:block;font-size:13.5px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tk .mt small{font-size:11.5px;color:var(--soft)}
-.tk .bars{display:flex;align-items:flex-end;gap:2px;height:13px;width:15px;flex:none;opacity:0}
-.tk.on .bars{opacity:1}
-.tk.on .mt b{font-weight:500}
-.bars i{width:3px;background:var(--ink);animation:eq .9s ease-in-out infinite}
-.bars i:nth-child(2){animation-delay:.25s}
-.bars i:nth-child(3){animation-delay:.5s}
-@keyframes eq{0%,100%{height:3px}50%{height:13px}}
 #dock{position:fixed;bottom:18px;right:18px;z-index:70;display:none;align-items:center;justify-content:center;
   width:54px;height:54px;background:var(--ink);color:var(--paper);border:0;border-radius:50%;
   box-shadow:0 10px 26px -8px rgba(12,58,32,.6)}
@@ -289,7 +284,7 @@ a{color:inherit}
 .empty{font-size:12.5px;font-style:italic;color:var(--soft)}
 
 /* ═══ kết ═══ */
-.thanks{font-family:"Dancing Script",cursive;font-size:25px;line-height:1.5;max-width:22ch;margin:0 auto}
+.thanks{position:relative;z-index:2;font-family:"Dancing Script",cursive;font-size:25px;line-height:1.5;max-width:22ch;margin:0 auto}
 .foot{padding:0 26px 46px;text-align:center;font-size:11.5px;color:var(--soft)}
 
 @media (prefers-reduced-motion:reduce){
@@ -382,9 +377,9 @@ const CONFIG = {
   weekday:"Thứ Tư",
   lunar:"Tức ngày 26 tháng 09 năm Bính Ngọ",
   ceremony:{ time:"11:00", place:"TƯ GIA" },      // hôn lễ
-  party:{    time:"",      place:"TƯ GIA" },      // tiệc rượu — điền giờ vào đây
-  welcome:"",                                      // giờ đón khách
-  openTime:"",                                     // giờ khai tiệc
+  party:{    time:"11:00", place:"TƯ GIA" },      // tiệc rượu — điền giờ vào đây
+  welcome:"10:00",                                  // giờ đón khách
+  openTime:"10:30",                                 // giờ khai tiệc
 
   /* ── Địa điểm ── */
   address:"Tư gia — Ấp Ninh Chùa, Xã Ninh Quới, Cà Mau",
@@ -392,10 +387,9 @@ const CONFIG = {
 
   /* ── Lịch trình ngày cưới ── */
   schedule:[
-    { time:"09:00", label:"Nhà trai khởi hành" },
+    { time:"10:00", label:"Đón khách" },
+    { time:"10:30", label:"Khai tiệc" },
     { time:"11:00", label:"Cử hành hôn lễ tại tư gia" },
-    { time:"11:30", label:"Đón khách" },
-    { time:"12:00", label:"Khai tiệc" },
     { time:"14:00", label:"Kết thúc tiệc" }
   ],
 
@@ -505,10 +499,6 @@ function build(){
     return `<button data-i="${i}">${photo(g,"Ảnh cưới "+(i+1),"ẢNH "+(i+1))}${extra}</button>`;
   }).join("");
 
-  const mus=CONFIG.music.map((t,i)=>`<button class="tk" data-i="${i}">
-      <em class="ix">${pad(i+1)}</em>
-      <span class="mt"><b>${esc(t.title)}</b><small>${esc(t.artist)}</small></span>
-      <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></button>`).join("");
 
   const sch=CONFIG.schedule.map(s=>`<div class="it">
       <span class="tm">${esc(s.time)}</span><span class="dot"></span>
@@ -598,12 +588,6 @@ function build(){
     <div class="tl">${sch}</div>
   </section>
 
-  <!-- ⑧ nhạc -->
-  <section class="sec rv">
-    <p class="hd">Nhạc của tụi mình</p>
-    <div class="tracks">${mus}</div>
-  </section>
-
   <!-- ⑨ sổ lưu bút -->
   <section class="sec rv">
     <p class="hd">Sổ lưu bút</p>
@@ -650,6 +634,16 @@ function spawnLeaves(n=16){
     html+=`<i class="leaf" style="left:${left}%;font-size:${size}px;--sway:${sway}px;animation-duration:${dur}s;animation-delay:${delay}s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="${path}"/></svg></i>`;
   }
   wrap.innerHTML=html;
+}
+function scheduleAutoScroll(delay=1500){
+  let cancelled=false;
+  const evs=["wheel","touchstart","pointerdown","keydown"];
+  const cancel=()=>{ cancelled=true; evs.forEach(ev=>removeEventListener(ev,cancel)); };
+  evs.forEach(ev=>addEventListener(ev,cancel,{passive:true,once:true}));
+  setTimeout(()=>{
+    evs.forEach(ev=>removeEventListener(ev,cancel));
+    if(!cancelled) autoScrollToEnd();
+  },delay);
 }
 function autoScrollToEnd(){
   const endY=document.documentElement.scrollHeight-innerHeight, startY=scrollY, dist=endY-startY;
@@ -723,7 +717,6 @@ function playTrack(i){
   audio.play().catch(()=>{});
 }
 function paintPlayer(){
-  document.querySelectorAll(".tk").forEach((b,i)=>b.classList.toggle("on",i===cur&&!audio.paused));
   const t=CONFIG.music[cur], dk=$("#dock");
   if(!t){ dk.classList.remove("on","sp"); return; }
   dk.classList.add("on");
@@ -818,7 +811,6 @@ function adminPanel(guests,err){
   reveals(); countdown();
   document.body.style.overflow="hidden";
 
-  document.querySelectorAll(".tk").forEach(b=>b.onclick=()=>playTrack(+b.dataset.i));
   document.querySelectorAll(".gal button").forEach(b=>b.onclick=()=>openLB(+b.dataset.i));
   $("#lbX").onclick=closeLB; $("#lbP").onclick=()=>moveLB(-1); $("#lbN").onclick=()=>moveLB(1);
   $("#lbT").onclick=e=>{ if(e.target.dataset.k!==undefined){ li=+e.target.dataset.k; paintLB(); } };
@@ -837,7 +829,7 @@ function adminPanel(guests,err){
     if(CONFIG.autoplay){ const f=CONFIG.music.findIndex(t=>t.src); if(f>-1) playTrack(f); }
     setTimeout(()=>{
       $("#cover").remove();
-      autoScrollToEnd();
+      scheduleAutoScroll();
     },900);
   },{once:true});
 })();
