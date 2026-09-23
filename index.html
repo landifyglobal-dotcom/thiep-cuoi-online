@@ -10,13 +10,13 @@
 <meta property="og:title" id="ogTitle" content="Thiệp mời — Hoàng Phi & Kiều My">
 <meta property="og:description" id="ogDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
 <meta property="og:url" id="ogUrl" content="https://nhatrai.hoangphi-kieumy.site/">
-<meta property="og:image" content="https://nhatrai.hoangphi-kieumy.site/anh/og/thumb.jpg">
+<meta property="og:image" content="https://storage.hoangphi-kieumy.site/anh/og/thumb.jpg">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="1200">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="twTitle" content="Thiệp mời — Hoàng Phi & Kiều My">
 <meta name="twitter:description" id="twDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
-<meta name="twitter:image" content="https://nhatrai.hoangphi-kieumy.site/anh/og/thumb.jpg">
+<meta name="twitter:image" content="https://storage.hoangphi-kieumy.site/anh/og/thumb.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Be+Vietnam+Pro:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -40,14 +40,14 @@ a{color:inherit}
 
 .sheet{position:relative;width:100%;max-width:470px;min-height:100vh;
   background:linear-gradient(rgba(252,251,245,.95),rgba(252,251,245,.95)),
-             url('hoa/flower.webp');
+             url('https://storage.hoangphi-kieumy.site/hoa/flower.webp');
   background-repeat:no-repeat,repeat;background-size:cover,520px 520px;
   background-position:0 0,center 0;
   box-shadow:0 24px 60px -26px rgba(12,58,32,.45);overflow:hidden}
 
 /* hoa watercolor — một ảnh, xoay/lật lại để dùng ở nhiều góc */
 .floral{position:absolute;pointer-events:none;z-index:0;
-  background-image:url('hoa/flower.webp');background-size:contain;background-repeat:no-repeat}
+  background-image:url('https://storage.hoangphi-kieumy.site/hoa/flower.webp');background-size:contain;background-repeat:no-repeat}
 .floral.br{bottom:-20px;right:-40px;width:56%;max-width:210px;aspect-ratio:1/1;
   opacity:.9;transform:rotate(178deg)}
 
@@ -149,7 +149,7 @@ a{color:inherit}
 .duo .row{display:flex;align-items:center;gap:14px}
 .duo .row.rev{flex-direction:row-reverse;text-align:right}
 .duo-band{position:relative;z-index:1;left:-26px;width:calc(100% + 52px);height:56px;margin:-40px 0;
-  background:url('hoa/decoration_bar.webp') center/cover}
+  background:url('https://storage.hoangphi-kieumy.site/hoa/decoration_bar.webp') center/cover}
 .ply{position:relative;z-index:2;width:64%;max-width:230px;flex:none;background:#fff;padding:10px;
   box-shadow:0 20px 36px -18px rgba(12,58,32,.45)}
 @keyframes photoInL{from{opacity:0;transform:translateY(26px) rotate(-8deg) scale(.94)}
@@ -361,8 +361,8 @@ const CONFIG = {
 
   /* ── Đôi uyên ương ── */
   event:"Lễ Tân Hôn",
-  groom:{ name:"Lê Hoàng Phi",     short:"Hoàng Phi", role:"Trưởng Nam", photo:"anh/index1.jpg" },
-  bride:{ name:"Đặng Thị Kiều My", short:"Kiều My",   role:"Trưởng Nữ",  photo:"anh/index2.jpg" },
+  groom:{ name:"Lê Hoàng Phi",     short:"Hoàng Phi", role:"Trưởng Nam", photo:"https://storage.hoangphi-kieumy.site/anh/web/index1.jpg" },
+  bride:{ name:"Đặng Thị Kiều My", short:"Kiều My",   role:"Trưởng Nữ",  photo:"https://storage.hoangphi-kieumy.site/anh/web/index2.jpg" },
 
   /* ── Song thân ── */
   parents:{
@@ -393,13 +393,16 @@ const CONFIG = {
     { time:"14:00", label:"Kết thúc tiệc" }
   ],
 
-  /* ── ẢNH ── file trong thư mục anh/ cạnh file này ── */
-  gallery:["anh/1.jpg","anh/2.jpg","anh/3.jpg","anh/4.jpg","anh/5.jpg",
-           "anh/6.jpg","anh/7.jpg","anh/8.jpg","anh/9.jpg","anh/10.jpg"],
+  /* ── ẢNH ── host trên Cloudflare R2 (storage.hoangphi-kieumy.site) ── */
+  gallery:["https://storage.hoangphi-kieumy.site/anh/web/1.jpg","https://storage.hoangphi-kieumy.site/anh/web/2.jpg",
+           "https://storage.hoangphi-kieumy.site/anh/web/3.jpg","https://storage.hoangphi-kieumy.site/anh/web/4.jpg",
+           "https://storage.hoangphi-kieumy.site/anh/web/5.jpg","https://storage.hoangphi-kieumy.site/anh/web/6.jpg",
+           "https://storage.hoangphi-kieumy.site/anh/web/7.jpg","https://storage.hoangphi-kieumy.site/anh/web/8.jpg",
+           "https://storage.hoangphi-kieumy.site/anh/web/9.jpg","https://storage.hoangphi-kieumy.site/anh/web/10.jpg"],
 
-  /* ── NHẠC ── file .mp3 trong thư mục nhac/ cạnh file này ── */
+  /* ── NHẠC ── host trên Cloudflare R2 ── */
   music:[
-    { title:"Nắng Ấm Xa Dần", artist:"", src:"nhac/1.mp3" }
+    { title:"Nắng Ấm Xa Dần", artist:"", src:"https://storage.hoangphi-kieumy.site/nhac/1.mp3" }
   ],
   autoplay:true,   // nhạc tự chạy ngay khi khách bấm "Mở thiệp"
 
