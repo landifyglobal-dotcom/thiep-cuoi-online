@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#14512F">
 <title>Thiệp mời — Hoàng Phi &amp; Kiều My</title>
-<meta name="description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta name="description" id="metaDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Thiệp mời — Hoàng Phi & Kiều My">
-<meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
-<meta property="og:url" content="https://nhatrai.hoangphi-kieumy.site/">
+<meta property="og:title" id="ogTitle" content="Thiệp mời — Hoàng Phi & Kiều My">
+<meta property="og:description" id="ogDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta property="og:url" id="ogUrl" content="https://nhatrai.hoangphi-kieumy.site/">
 <meta property="og:image" content="https://nhatrai.hoangphi-kieumy.site/anh/1.jpg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="1066">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Thiệp mời — Hoàng Phi & Kiều My">
-<meta name="twitter:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta name="twitter:title" id="twTitle" content="Thiệp mời — Hoàng Phi & Kiều My">
+<meta name="twitter:description" id="twDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
 <meta name="twitter:image" content="https://nhatrai.hoangphi-kieumy.site/anh/1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -617,7 +617,14 @@ function showGuest(g){
   $("#guestName").textContent=n;
   $("#cvGuest").textContent=has?"Kính mời "+n:"";
   if(has&&g.loi_nhan){ const e=$("#guestNote"); e.textContent=g.loi_nhan; e.hidden=false; }
-  document.title=`${n} — Thiệp mời ${CONFIG.groom.short} & ${CONFIG.bride.short}`;
+  const title=has?`Kính mời ${n} — Thiệp mời ${CONFIG.groom.short} & ${CONFIG.bride.short}`
+                 :`Thiệp mời — ${CONFIG.groom.short} & ${CONFIG.bride.short}`;
+  const desc=has?`Trân trọng kính mời ${n} đến chung vui cùng gia đình trong ${CONFIG.event} của ${CONFIG.groom.short} & ${CONFIG.bride.short}.`
+                 :$("#metaDesc").content;
+  document.title=title;
+  [$("#ogTitle"),$("#twTitle")].forEach(m=>m&&(m.content=title));
+  [$("#ogDesc"),$("#twDesc")].forEach(m=>m&&(m.content=desc));
+  if($("#ogUrl")) $("#ogUrl").content=location.href;
   guestCode=has?(g.ma||"").trim():"";
   if(has){ const wn=$("#wName"); if(wn&&!wn.value) wn.value=n; }
 }
