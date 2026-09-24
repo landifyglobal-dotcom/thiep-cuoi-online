@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#14512F">
 <title>Thiệp mời — Hoàng Phi &amp; Kiều My</title>
-<meta name="description" id="metaDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
-<meta property="og:type" content="website">
+<meta name="description" id="metaDesc" content="Trân trọng thân mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta property="og:type" content="websiFte">
 <meta property="og:title" id="ogTitle" content="Thiệp mời — Hoàng Phi & Kiều My">
-<meta property="og:description" id="ogDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta property="og:description" id="ogDesc" content="Trân trọng thân mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
 <meta property="og:url" id="ogUrl" content="https://nhatrai.hoangphi-kieumy.site/">
 <meta property="og:image" content="https://storage.hoangphi-kieumy.site/anh/og/thumb.jpg">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="1200">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="twTitle" content="Thiệp mời — Hoàng Phi & Kiều My">
-<meta name="twitter:description" id="twDesc" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta name="twitter:description" id="twDesc" content="Trân trọng thân mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
 <meta name="twitter:image" content="https://storage.hoangphi-kieumy.site/anh/og/thumb.jpg">
 <link rel="icon" href="https://storage.hoangphi-kieumy.site/hy.ico" type="image/x-icon">
 <link rel="shortcut icon" href="https://storage.hoangphi-kieumy.site/hy.ico" type="image/x-icon">
@@ -359,7 +359,7 @@ a{color:inherit}
 const CONFIG = {
 
   /* ── Danh sách khách (Google Sheet) ── */
-  SHEET_ID:"1hGbvLvaqIb6AZ8hXIcubp4t8tz70TIfxBCiqnxtfjwk", SHEET_NAME:"Khách mời", PARAM:"ma",
+  SHEET_ID:"1pe8M_x1Pud7npgiHrWPiWxLe2kkTLI1Y", SHEET_NAME:"Khách mời", PARAM:"ma",
 
   /* ── Đôi uyên ương ── */
   event:"Lễ Tân Hôn",
@@ -369,7 +369,7 @@ const CONFIG = {
   /* ── Song thân ── */
   parents:{
     groom:{ side:"Nhà trai", father:"LÊ THÀNH SƠN",    mother:"TÔ THỊ HỒNG ĐẸP",
-            addr:"Ấp Ninh Chùa, Xã Ninh Quới — Cà Mau" },
+            addr:"Ninh Chùa, X.Ninh Quới — T.Cà Mau" },
     bride:{ side:"Nhà gái",  father:"ĐẶNG QUỐC CƯỜNG", mother:"BÙI THỊ KIỀU OANH",
             addr:"Khóm Giồng Trôm, P. Duyên Hải — Vĩnh Long" }
   },
@@ -384,7 +384,7 @@ const CONFIG = {
   openTime:"10:30",                                 // giờ khai tiệc
 
   /* ── Địa điểm ── */
-  address:"Tư gia — Ấp Ninh Chùa, Xã Ninh Quới, Cà Mau",
+  address:"Tư gia —  Áp Ninh Chùa, Xã Ninh Quới, Tỉnh Cà Mau",
   mapQuery:"9.504060,105.532667",                  // toạ độ chính xác — dùng cho bản đồ nhúng + chỉ đường
 
   /* ── Lịch trình ngày cưới ── */
@@ -527,7 +527,7 @@ function build(){
       </div>
     </div>
     <div class="orn"><i></i><b>❦</b><i></i></div>
-    <p class="hd" style="margin:0">Trân trọng kính mời</p>
+    <p class="hd" style="margin:0">Trân trọng thân mời</p>
     <p class="big" id="guestName" style="font-family:'EB Garamond',serif;font-style:italic;font-weight:500">Quý khách</p>
     <p class="lunar" id="guestNote" hidden></p>
   </section>
@@ -620,11 +620,11 @@ function showGuest(g){
   const has=!!(g&&(g.xung_ho||g.ten));
   const n=has?[g.xung_ho,g.ten].filter(Boolean).join(" "):"Quý khách";
   $("#guestName").textContent=n;
-  $("#cvGuest").textContent=has?"Kính mời "+n:"";
+  $("#cvGuest").textContent=has?"Thân mời "+n:"";
   if(has&&g.loi_nhan){ const e=$("#guestNote"); e.textContent=g.loi_nhan; e.hidden=false; }
-  const title=has?`Kính mời ${n} — Thiệp mời ${CONFIG.groom.short} & ${CONFIG.bride.short}`
+  const title=has?`Thân mời ${n} — Thiệp mời ${CONFIG.groom.short} & ${CONFIG.bride.short}`
                  :`Thiệp mời — ${CONFIG.groom.short} & ${CONFIG.bride.short}`;
-  const desc=has?`Trân trọng kính mời ${n} đến chung vui cùng gia đình trong ${CONFIG.event} của ${CONFIG.groom.short} & ${CONFIG.bride.short}.`
+  const desc=has?`Trân trọng thân mời ${n} đến chung vui cùng gia đình trong ${CONFIG.event} của ${CONFIG.groom.short} & ${CONFIG.bride.short}.`
                  :$("#metaDesc").content;
   document.title=title;
   [$("#ogTitle"),$("#twTitle")].forEach(m=>m&&(m.content=title));

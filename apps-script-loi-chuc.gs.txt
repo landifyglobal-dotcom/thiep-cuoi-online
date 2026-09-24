@@ -17,7 +17,7 @@ function doPost(e) {
         .setMimeType(ContentService.MimeType.JSON);
     }
 
-    var ss = SpreadsheetApp.openById('1hGbvLvaqIb6AZ8hXIcubp4t8tz70TIfxBCiqnxtfjwk');
+    var ss = SpreadsheetApp.openById('1pe8M_x1Pud7npgiHrWPiWxLe2kkTLI1Y');
     var sheet = ss.getSheetByName('Khách mời');
     var values = sheet.getDataRange().getValues();
     var header = values[0];
