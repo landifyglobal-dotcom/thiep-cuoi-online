@@ -279,7 +279,13 @@ a{color:inherit}
 .wform input:focus,.wform textarea:focus{border-color:var(--line);outline:none}
 .wform textarea{min-height:86px}
 .wform .btn{justify-self:start;margin-top:2px}
-.wall{max-width:330px;margin:20px auto 0;text-align:left;display:grid;gap:8px}
+.wall{max-width:330px;margin:20px auto 0;text-align:left;display:grid;gap:8px;
+  overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding-right:2px}
+.wall::-webkit-scrollbar{width:4px}
+.wall::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+/* còn lời chúc bên dưới → mờ dần mép dưới để gợi ý cuộn */
+.wall.more{-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
 .wish{background:var(--mint);padding:14px 15px;border-radius:12px}
 .wish b{font-family:"EB Garamond",serif;font-size:15px;font-weight:600}
 .wish p{font-size:13px;color:var(--soft);margin-top:3px;white-space:pre-wrap;line-height:1.55}
@@ -414,9 +420,12 @@ const CONFIG = {
      Cách tạo: mở Google Sheet → Tiện ích mở rộng → Apps Script, dán đoạn code
      doPost ở cuối file này, Triển khai → Triển khai mới → Web app,
      "Thực thi với quyền của": Tôi, "Người có quyền truy cập": Bất kỳ ai,
-     rồi dán URL /exec vào scriptUrl bên dưới. Chỉ khách mở bằng link mời
-     riêng (?ma=...) mới gửi được lời chúc vì cần khớp đúng hàng. */
+     rồi dán URL /exec vào scriptUrl bên dưới.
+     • Khách có mã (?ma=...): ghi vào cột loi_chuc_tu_khach của đúng hàng.
+     • Khách tự do (không có mã): bắt buộc nhập tên, lời chúc được thêm thành
+       hàng mới ở tab wishSheet (Apps Script tự tạo tab nếu chưa có). */
   guestbook:{
+    wishSheet:"loi_chuc_tu_khach",   // tab chứa lời chúc của khách tự do: thoi_gian | ten | loi_chuc
     scriptUrl:"https://script.google.com/macros/s/AKfycbzZW88dWKBNjm-83gDtrtz01tn6NyKrjLaFBJeFZ9JW_89q7OuN0WZJ2AiewSvRF5dyuA/exec" // URL .../exec của Apps Script Web App
   },
 
@@ -748,6 +757,30 @@ function paintWishes(list){
   if(!list.length){ w.innerHTML=`<p class="empty">Chưa có lời chúc nào. Hãy là người đầu tiên!</p>`; return; }
   w.innerHTML=list.slice().reverse().map(x=>
     `<div class="wish"><b>${esc(x.name)}</b><p>${esc(x.msg)}</p></div>`).join("");
+  fitWall();
+}
+/* chỉ hiện ~4,5 lời chúc (thấy một nửa lời chúc thứ 5 để biết còn), phần còn lại cuộn trong khung */
+const WALL_SHOW=4;
+function fitWall(){
+  const w=$("#wall"), items=w.querySelectorAll(".wish");
+  if(items.length<=WALL_SHOW+1){ w.style.maxHeight=""; w.classList.remove("more"); return; }
+  const cut=items[WALL_SHOW];
+  w.style.maxHeight=Math.round(cut.getBoundingClientRect().top-w.getBoundingClientRect().top+w.scrollTop+cut.offsetHeight*.5)+"px";
+  markWall();
+}
+function markWall(){
+  const w=$("#wall");
+  w.classList.toggle("more",w.scrollHeight-w.scrollTop-w.clientHeight>4);
+}
+/* lời chúc khách tự do — tab riêng; nếu tab chưa có, gviz trả về tab đầu nên phải kiểm tra cột */
+async function readFreeWishes(){
+  const gb=CONFIG.guestbook;
+  if(!CONFIG.SHEET_ID||!gb.wishSheet) return [];
+  try{
+    const rows=await readSheet(CONFIG.SHEET_ID,gb.wishSheet);
+    if(!rows.length||!("loi_chuc" in rows[0])||("ma" in rows[0])) return [];
+    return rows.map(r=>({name:r.ten||"Ẩn danh",msg:(r.loi_chuc||"").trim()})).filter(x=>x.msg);
+  }catch(e){ return []; }
 }
 function wishesFromGuests(guests){
   return guests.map(g=>({
@@ -760,14 +793,16 @@ function sendWish(){
   const name=$("#wName").value.trim(), msg=$("#wMsg").value.trim();
   const btn=$("#wSend");
   if(!msg){ $("#wMsg").focus(); return; }
-  if(!guestCode){ btn.textContent="Cần mở bằng link mời riêng"; setTimeout(()=>btn.textContent="Gửi lời chúc",2600); return; }
+  // khách tự do phải có tên để lưu thành hàng mới
+  if(!guestCode&&!name){ $("#wName").focus(); btn.textContent="Vui lòng nhập tên"; setTimeout(()=>btn.textContent="Gửi lời chúc",2200); return; }
   if(!gb.scriptUrl){ btn.textContent="Chưa cấu hình"; setTimeout(()=>btn.textContent="Gửi lời chúc",2200); return; }
   fetch(gb.scriptUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},
-        body:JSON.stringify({ma:guestCode,loi_chuc:msg})}).catch(()=>{});
+        body:JSON.stringify(guestCode?{ma:guestCode,loi_chuc:msg}:{ten:name,loi_chuc:msg})}).catch(()=>{});
   const w=$("#wall");
   if(w.querySelector(".empty")) w.innerHTML="";
   w.insertAdjacentHTML("afterbegin",
     `<div class="wish"><b>${esc(name||"Ẩn danh")}</b><p>${esc(msg)}</p></div>`);
+  w.scrollTop=0; fitWall();
   $("#wMsg").value="";
   btn.textContent="Đã gửi ✓"; setTimeout(()=>btn.textContent="Gửi lời chúc",2200);
 }
@@ -807,8 +842,9 @@ function adminPanel(guests,err){
   const code=(qs.get(CONFIG.PARAM)||"").trim().toLowerCase();
 
   let guests=[],err=null;
-  try{ guests=CONFIG.SHEET_ID?await readSheet(CONFIG.SHEET_ID,CONFIG.SHEET_NAME):DEMO; }
-  catch(e){ err="Không đọc được sheet ("+e.message+"). Kiểm tra quyền chia sẻ."; guests=DEMO; }
+  const freeWishesP=readFreeWishes();   // đọc song song với danh sách khách
+  try{ guests=CONFIG.SHEET_ID?await readSheet(CONFIG.SHEET_ID,CONFIG.SHEET_NAME):[]; }
+  catch(e){ err="Không đọc được sheet ("+e.message+"). Kiểm tra quyền chia sẻ."; guests=[]; }
 
   if(qs.has("admin")){ adminPanel(guests,err); return; }
 
@@ -833,7 +869,10 @@ function adminPanel(guests,err){
     if(e.key==="Escape")closeLB(); if(e.key==="ArrowLeft")moveLB(-1); if(e.key==="ArrowRight")moveLB(1);
   });
 
-  paintWishes(wishesFromGuests(guests));
+  paintWishes([...wishesFromGuests(guests),...await freeWishesP]);
+  $("#wall").addEventListener("scroll",markWall,{passive:true});
+  addEventListener("resize",fitWall);
+  document.fonts&&document.fonts.ready.then(fitWall);
 
   $("#cover").addEventListener("click",()=>{
     $("#cover").classList.add("open");

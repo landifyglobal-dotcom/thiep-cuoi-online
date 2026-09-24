@@ -1,43 +1,64 @@
+var SHEET_ID = '1pe8M_x1Pud7npgiHrWPiWxLe2kkTLI1Y';
+var GUEST_SHEET = 'Khách mời';   // khách có mã: ghi vào cột loi_chuc_tu_khach của đúng hàng
+var WISH_SHEET = 'Lời chúc';     // khách tự do: thêm hàng mới (tự tạo tab nếu chưa có)
+
 function doPost(e) {
   // Bấm nút "Run" trong trình soạn để test sẽ luôn báo lỗi ở dòng này vì
   // không có "e" thật — chỉ gọi được doPost bằng cách POST tới URL /exec
   // sau khi đã Triển khai (Deploy). Đây là cách kiểm tra đúng, không phải chạy nút Run.
   if (!e || !e.postData) {
-    return ContentService.createTextOutput(JSON.stringify({ok:false,error:'no postData — must call via deployed web app URL, not Run button'}))
-      .setMimeType(ContentService.MimeType.JSON);
+    return json({ok:false,error:'no postData — must call via deployed web app URL, not Run button'});
   }
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
     var data = JSON.parse(e.postData.contents);
     var ma = (data.ma || '').toString().trim().toLowerCase();
-    var loiChuc = (data.loi_chuc || '').toString().trim();
-    if (!ma || !loiChuc) {
-      return ContentService.createTextOutput(JSON.stringify({ok:false,error:'missing ma or loi_chuc'}))
-        .setMimeType(ContentService.MimeType.JSON);
+    var ten = clean(data.ten, 60);
+    var loiChuc = clean(data.loi_chuc, 500);
+    if (!loiChuc) return json({ok:false,error:'missing loi_chuc'});
+
+    var ss = SpreadsheetApp.openById(SHEET_ID);
+
+    // ---- khách tự do: không có mã, bắt buộc có tên ----
+    if (!ma) {
+      if (!ten) return json({ok:false,error:'missing ten'});
+      var ws = ss.getSheetByName(WISH_SHEET);
+      if (!ws) {
+        ws = ss.insertSheet(WISH_SHEET);
+        ws.appendRow(['thoi_gian', 'ten', 'loi_chuc']);
+        ws.setFrozenRows(1);
+      }
+      ws.appendRow([new Date(), ten, loiChuc]);
+      return json({ok:true,mode:'free'});
     }
 
-    var ss = SpreadsheetApp.openById('1pe8M_x1Pud7npgiHrWPiWxLe2kkTLI1Y');
-    var sheet = ss.getSheetByName('Khách mời');
+    // ---- khách có mã: ghi vào đúng hàng ----
+    var sheet = ss.getSheetByName(GUEST_SHEET);
     var values = sheet.getDataRange().getValues();
     var header = values[0];
     var maCol = header.indexOf('ma');
     var wishCol = header.indexOf('loi_chuc_tu_khach');
-    if (maCol === -1 || wishCol === -1) {
-      return ContentService.createTextOutput(JSON.stringify({ok:false,error:'column not found'}))
-        .setMimeType(ContentService.MimeType.JSON);
-    }
+    if (maCol === -1 || wishCol === -1) return json({ok:false,error:'column not found'});
 
     for (var i = 1; i < values.length; i++) {
       if ((values[i][maCol] || '').toString().trim().toLowerCase() === ma) {
         sheet.getRange(i + 1, wishCol + 1).setValue(loiChuc);
-        return ContentService.createTextOutput(JSON.stringify({ok:true}))
-          .setMimeType(ContentService.MimeType.JSON);
+        return json({ok:true,mode:'guest'});
       }
     }
-    return ContentService.createTextOutput(JSON.stringify({ok:false,error:'guest not found'}))
-      .setMimeType(ContentService.MimeType.JSON);
+    return json({ok:false,error:'guest not found'});
   } finally {
     lock.releaseLock();
   }
+}
+
+// cắt độ dài và chặn chèn công thức (ô bắt đầu bằng = + - @ sẽ bị Sheet hiểu là công thức)
+function clean(v, max) {
+  var s = (v || '').toString().trim().slice(0, max);
+  return /^[=+\-@]/.test(s) ? "'" + s : s;
+}
+
+function json(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
