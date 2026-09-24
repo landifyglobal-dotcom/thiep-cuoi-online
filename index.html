@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-<title>Thiệp mời — Nhà Gái — Hoàng Phi &amp; Kiều My</title>
-<meta name="description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<title>Thiệp mời — Kiều My &amp; Hoàng Phi</title>
+<meta name="description" content="Trân trọng thân mời quý khách đến chung vui cùng gia đình trong Lễ Vu Quy của Hoàng Phi & Kiều My.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Thiệp mời — Nhà Gái — Hoàng Phi & Kiều My">
-<meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta property="og:title" content="Thiệp mời — Kiều My & Hoàng Phi">
+<meta property="og:description" content="Trân trọng thân mời quý khách đến chung vui cùng gia đình trong Lễ Vu Quy của Hoàng Phi & Kiều My.">
 <meta property="og:url" content="https://nhagai.hoangphi-kieumy.site/">
 <meta property="og:image" content="https://storage.hoangphi-kieumy.site/anh_nha_gai/og/thumb.jpg">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="1200">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Thiệp mời — Nhà Gái — Hoàng Phi & Kiều My">
-<meta name="twitter:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình trong Lễ Tân Hôn của Hoàng Phi & Kiều My.">
+<meta name="twitter:title" content="Thiệp mời — Hoàng Phi & Kiều My">
+<meta name="twitter:description" content="Trân trọng thân mời quý khách đến chung vui cùng gia đình trong Lễ Vu Quy của Hoàng Phi & Kiều My.">
 <meta name="twitter:image" content="https://storage.hoangphi-kieumy.site/anh_nha_gai/og/thumb.jpg">
 <link rel="icon" href="https://storage.hoangphi-kieumy.site/hy.ico" type="image/x-icon">
 <link rel="shortcut icon" href="https://storage.hoangphi-kieumy.site/hy.ico" type="image/x-icon">
@@ -604,7 +604,7 @@
       <h1 class="cv-names" id="cvNames"></h1>
       <div class="cv-orn"><i></i><span>❦</span><i></i></div>
       <p class="cv-date" id="cvDate"></p>
-      <p class="cv-lead">Trân trọng kính mời</p>
+      <p class="cv-lead">Trân trọng thân mời</p>
       <p class="cv-guest loading" id="cvGuest">Quý khách</p>
       <p class="cv-note" id="cvNote" hidden></p>
       <span class="cv-cta">Mở thiệp</span>
@@ -648,9 +648,9 @@
     <div class="wine-card">
       <h2>Thông tin lễ cưới</h2>
       <div class="wc-fams">
-        <div class="wc-fam"><small>Ông Bà</small><b>Đặng Quốc Cường</b><b>Bùi Thị Kiều Oanh</b><em>Phường Duyên Hải, Tỉnh Vĩnh Long</em></div>
+        <div class="wc-fam"><small>Ông Bà</small><b>Đặng Quốc Cường</b><b>Bùi Thị Kiều Oanh</b><em>Khóm Giồng Trôm, Phường Duyên Hải, Tỉnh Vĩnh Long</em></div>
         <div class="vr"></div>
-        <div class="wc-fam"><small>Ông Bà</small><b>Lê Thành Sơn</b><b>Tô Thị Hồng Đẹp</b><em>Xã Ninh Quới - Tỉnh Cà Mau</em></div>
+        <div class="wc-fam"><small>Ông Bà</small><b>Lê Thành Sơn</b><b>Tô Thị Hồng Đẹp</b><em>Ấp Ninh Thuận, Xã Ninh Quới, Tỉnh Cà Mau</em></div>
       </div>
       <p class="wc-tell">Trân trọng báo tin<br></p>
       <div class="wc-names">
@@ -832,7 +832,7 @@ function gcalUrl(){
   const p = new URLSearchParams({ action: "TEMPLATE",
     text: `Đám cưới ${CONFIG.groom.name} & ${CONFIG.bride.name}`,
     dates: `${f(s)}/${f(e)}`, ctz: "Asia/Ho_Chi_Minh", location: CONFIG.address,
-    details: `Lễ Tân Hôn của ${CONFIG.groom.name} & ${CONFIG.bride.name}` });
+    details: `Lễ Vu Quy của ${CONFIG.groom.name} & ${CONFIG.bride.name}` });
   return "https://www.google.com/calendar/render?" + p;
 }
 
@@ -1200,7 +1200,7 @@ function closeLB(){ $("#lb").classList.remove("on"); document.body.style.overflo
       if (cvGuest) cvGuest.textContent = n;
       const note = (g.loi_nhan || "").trim(), cvNote = $("#cvNote");
       if (note && cvNote){ cvNote.textContent = note; cvNote.hidden = false; }
-      $("#guestLine").textContent = "Kính mời " + n;
+      $("#guestLine").textContent = "Thân mời " + n;
       guestCode = (g.ma || "").trim();
       const wn = $("#wName"); if (wn && !wn.value) wn.value = n;
       document.title = `${n} — Thiệp mời ${CONFIG.bride.short} & ${CONFIG.groom.short}`;
