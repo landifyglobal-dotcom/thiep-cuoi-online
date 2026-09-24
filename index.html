@@ -134,6 +134,22 @@
   #cover .cv-orn span{ font-size:14px; }
   #cover .cv-date{ font-family:var(--font-display); font-size:17px; color:var(--wine); letter-spacing:.04em; }
   #cover .cv-lead{ margin-top:14px; font-family:var(--font-script); font-size:26px; color:var(--wine-soft); }
+  /* tên khách mời — đọc từ link mời riêng, mặc định "Quý khách" */
+  #cover .cv-guest{
+    display:block; width:fit-content; min-width:58%; max-width:84%; margin:4px auto 0; padding:0 8px 6px;
+    font-family:var(--font-display); font-size:20px; line-height:1.3; color:var(--wine-deep);
+    text-wrap:balance;
+    border-bottom:1px dashed rgba(201,161,90,.75);
+    transition:opacity .5s ease;
+  }
+  #cover .cv-guest.loading{ opacity:0; }
+  /* lời nhắn riêng cho khách (cột loi_nhan) — chỉ hiện khi có */
+  #cover .cv-note{
+    max-width:84%; margin:10px auto 0;
+    font-family:var(--font-display); font-style:italic; font-size:14px; line-height:1.5;
+    color:var(--wine-soft); text-wrap:balance; white-space:pre-line;
+    animation:cvRise .6s ease-out both;
+  }
   #cover .cv-cta{
     position:relative; display:inline-flex; align-items:center; gap:8px;
     margin-top:18px; padding:13px 32px; border-radius:999px;
@@ -628,6 +644,8 @@
       <div class="cv-orn"><i></i><span>❦</span><i></i></div>
       <p class="cv-date" id="cvDate"></p>
       <p class="cv-lead">Trân trọng kính mời</p>
+      <p class="cv-guest loading" id="cvGuest">Quý khách</p>
+      <p class="cv-note" id="cvNote" hidden></p>
       <span class="cv-cta">Mở thiệp</span>
     </div>
     <span class="cv-flora br"><span class="sway"><img src="https://storage.hoangphi-kieumy.site/anh_nha_gai/flower2-decoration.webp" alt=""></span></span>
@@ -1252,14 +1270,19 @@ function closeLB(){ $("#lb").classList.remove("on"); document.body.style.overflo
 
     const g = code ? guests.find(x => (x.ma || "").trim().toLowerCase() === code) : null;
     const has = !!(g && (g.xung_ho || g.ten));
+    const cvGuest = $("#cvGuest");
     if (has){
       const n = [g.xung_ho, g.ten].filter(Boolean).join(" ");
+      if (cvGuest) cvGuest.textContent = n;
+      const note = (g.loi_nhan || "").trim(), cvNote = $("#cvNote");
+      if (note && cvNote){ cvNote.textContent = note; cvNote.hidden = false; }
       $("#guestLine").textContent = "Kính mời " + n;
       guestCode = (g.ma || "").trim();
       const wn = $("#wName"); if (wn && !wn.value) wn.value = n;
       document.title = `${n} — Thiệp mời ${CONFIG.bride.short} & ${CONFIG.groom.short}`;
     }
 
+    if (cvGuest) cvGuest.classList.remove("loading");
     paintWishes(wishesFromGuests(guests));
   })();
 })();
