@@ -20,7 +20,7 @@
 <link rel="shortcut icon" href="https://storage.hoangphi-kieumy.site/hy.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&display=swap&subset=vietnamese" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Pinyon+Script&display=swap&subset=vietnamese" rel="stylesheet">
 <style>
   :root{
     --wine:#6f0f1c;
@@ -33,6 +33,7 @@
     --blush:#f3d9dd;
     --font-display:'Playfair Display','Songti SC',serif;
     --font-script:'Great Vibes','Brush Script MT',cursive;
+    --font-names:'Pinyon Script',cursive;
     --font-ui:-apple-system,'Helvetica Neue',Arial,sans-serif;
   }
 
@@ -120,12 +121,12 @@
   }
   #cover .cv-names{ margin-top:18px; font-weight:400; }
   #cover .cv-names .n{
-    display:block; font-family:var(--font-display); font-weight:400;
-    font-size:clamp(34px,10vw,42px); line-height:1.15; color:var(--wine-deep);
+    display:block; font-family:var(--font-names); font-weight:400;
+    font-size:clamp(42px,12.5vw,54px); line-height:1.3; color:var(--wine-deep);
   }
   #cover .cv-names .amp{
-    display:block; font-family:var(--font-script); font-size:44px; line-height:.9;
-    color:var(--gold); margin:4px 0 2px;
+    display:block; font-family:var(--font-names); font-size:40px; line-height:.9;
+    color:var(--gold); margin:2px 0;
   }
   #cover .cv-orn{ display:flex; align-items:center; gap:10px; margin:18px auto 14px; width:70%; color:var(--gold); }
   #cover .cv-orn i{ flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(201,161,90,.8)); }
@@ -291,18 +292,17 @@
   }
   .names-plate .n1, .names-plate .n2{
     position:relative; z-index:1;
-    font-family:var(--font-display);
+    font-family:var(--font-names);
     font-weight:400;
-    font-size:46px;
+    font-size:56px;
     color:var(--wine-deep);
-    line-height:1.45;
-    letter-spacing:-.005em;
+    line-height:1.4;
   }
   /* dấu & chữ ký mờ nằm chìm giữa hai tên */
   .names-plate .amp{
     position:absolute; left:50%; top:50%;
     transform:translate(-50%,-50%);
-    font-family:var(--font-script);
+    font-family:var(--font-names);
     font-size:110px;
     line-height:1;
     color:var(--gold);
@@ -342,7 +342,7 @@
     letter-spacing:.03em;
   }
 
-  /* ================= THẺ THÔNG TIN (lễ cưới / tiệc cưới / lịch trình) ================= */
+  /* ================= THẺ THÔNG TIN (lễ cưới / tiệc cưới) ================= */
   .wc-wrap{ position:relative; margin:44px 20px 0; }
   .wc-flora{
     position:absolute; z-index:2; width:34%; pointer-events:none;
@@ -369,9 +369,9 @@
   .wc-tell{ margin-top:22px; font-size:12px; letter-spacing:.05em; color:rgba(236,228,216,.75); line-height:1.7; text-transform:uppercase; }
 
   .wc-names{ margin-top:18px; display:flex; flex-direction:column; align-items:center; gap:2px; }
-  .wc-names h3{ font-family:"EB Garamond",serif; font-size:25px; color:#ece4d8; line-height:1.3; }
+  .wc-names h3{ font-family:var(--font-names); font-weight:400; font-size:34px; color:#ece4d8; line-height:1.35; }
   .wc-names .role{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(236,228,216,.7); }
-  .wc-names .amp{ font-size:20px; color:var(--gold); margin:3px 0; }
+  .wc-names .amp{ font-family:var(--font-names); font-size:30px; line-height:1; color:var(--gold); margin:4px 0 2px; }
 
   .wc-venue{ margin-top:22px; font-size:13px; letter-spacing:.04em; color:rgba(236,228,216,.75); line-height:1.7; text-transform:uppercase; }
   .wc-addr{ margin-top:4px; font-size:12.5px; line-height:1.6; color:rgba(236,228,216,.75); }
@@ -415,16 +415,6 @@
   .wc-cal .cal-mark svg{ position:absolute; inset:0; width:100%; height:100%; fill:var(--wine-deep); filter:drop-shadow(0 1px 1px rgba(0,0,0,.15)); }
   .wc-cal .cal-mark span{ position:relative; z-index:1; color:#fff; font-size:11px; font-weight:700; }
 
-  .wc-timeline{ margin-top:24px; display:grid; grid-template-columns:auto 16px 1fr; row-gap:26px; column-gap:14px; text-align:left; }
-  .wc-timeline .t-time{ text-align:right; font-family:"Times New Roman",serif; font-size:16px; color:#ece4d8; align-self:center; white-space:nowrap; position:relative; }
-  .wc-timeline .t-time img{ position:absolute; right:100%; top:50%; transform:translate(-10px,-50%); width:26px; height:26px; object-fit:contain; }
-  .wc-timeline .t-dot{ position:relative; display:flex; align-items:center; justify-content:center; align-self:stretch; }
-  .wc-timeline .t-dot::before{ content:""; position:absolute; top:-26px; bottom:-26px; left:50%; width:1px; background:rgba(236,228,216,.35); }
-  .wc-timeline .t-item:first-child .t-dot::before{ top:50%; }
-  .wc-timeline .t-item:last-child .t-dot::before{ bottom:50%; }
-  .wc-timeline .t-dot span{ position:relative; z-index:1; width:9px; height:9px; border-radius:50%; background:#ece4d8; box-shadow:0 0 0 3px rgba(236,228,216,.15); }
-  .wc-timeline .t-label{ font-size:13px; color:rgba(236,228,216,.85); align-self:center; }
-
   /* ================= RSVP ================= */
   .rsvp-wrap{ display:flex; justify-content:center; padding:38px 24px 6px; }
   .rsvp-btn{
@@ -446,12 +436,30 @@
   }
 
   .closing{
-    text-align:center;
-    padding:56px 24px;
-    color:var(--wine);
+    position:relative; text-align:center;
+    margin:48px 20px 40px; padding:50px 26px 46px;
+    border-radius:16px; color:#ece4d8;
+    background:radial-gradient(120% 90% at 50% 0%, var(--wine-soft) 0%, var(--wine-deep) 70%, #2e070c 100%);
+    box-shadow:0 14px 30px rgba(74,13,20,.35);
   }
-  .closing .script{ font-family:var(--font-script); font-size:28px; }
-  .closing p{ font-size:13px; margin-top:10px; opacity:.8; }
+  .closing::before{
+    content:""; position:absolute; inset:9px; pointer-events:none;
+    border:1px solid rgba(230,205,154,.45); border-radius:11px;
+  }
+  .closing > *{ position:relative; z-index:3; }
+  .closing .wc-flora{ position:absolute; z-index:1; width:26%; }
+  .closing .script{
+    font-family:var(--font-script); font-size:54px; line-height:1.1;
+    color:var(--gold-soft); text-shadow:0 2px 12px rgba(201,161,90,.35);
+  }
+  .closing-orn{ display:flex; align-items:center; justify-content:center; gap:10px; margin:14px auto 16px; color:var(--gold); font-size:13px; }
+  .closing-orn span{ width:56px; height:1px; background:linear-gradient(90deg, transparent, var(--gold)); }
+  .closing-orn span:last-child{ transform:scaleX(-1); }
+  .closing p{
+    max-width:300px; margin:0 auto;
+    font-family:var(--font-display); font-style:italic; font-size:15px; line-height:1.8;
+    color:rgba(236,228,216,.92);
+  }
 
   /* ================= SỔ LƯU BÚT ================= */
   .gb-form{ max-width:330px; margin:26px auto 0; text-align:left; display:grid; gap:10px; }
@@ -644,7 +652,7 @@
 
   <!-- ================= THÔNG TIN LỄ CƯỚI ================= -->
   <div class="wc-wrap">
-    <img class="wc-flora" src="https://storage.hoangphi-kieumy.site/anh_nha_gai/flower2-decoration.webp" alt="" style="right:-16%;bottom:42%;transform:rotate(14deg)">
+    <img class="wc-flora" src="https://storage.hoangphi-kieumy.site/anh_nha_gai/flower2-decoration.webp" alt="" style="right:-16%;bottom:-5%;transform:rotate(14deg)">
     <div class="wine-card">
       <h2>Thông tin lễ cưới</h2>
       <div class="wc-fams">
@@ -652,7 +660,7 @@
         <div class="vr"></div>
         <div class="wc-fam"><small>Ông Bà</small><b>Lê Thành Sơn</b><b>Tô Thị Hồng Đẹp</b><em>Ấp Ninh Thuận, Xã Ninh Quới, Tỉnh Cà Mau</em></div>
       </div>
-      <p class="wc-tell">Trân trọng báo tin<br></p>
+      <p class="wc-tell">Trân trọng kính mời đến dự buổi tiệc cưới của gia đình chúng tôi<br></p>
       <div class="wc-names">
         <h3>Đặng Thị Kiều My</h3><div class="role">Trưởng Nữ</div>
         <div class="amp">&amp;</div>
@@ -731,15 +739,6 @@
     <a href="#" class="map-btn" id="mapBtn" target="_blank" rel="noopener">Chỉ đường</a>
   </section>
 
-  <!-- ================= LỊCH TRÌNH NGÀY CƯỚI ================= -->
-  <div class="wc-wrap">
-    <img class="wc-flora" src="https://storage.hoangphi-kieumy.site/anh_nha_gai/flower2-decoration.webp" alt="" style="right:-16%;top:-8%;transform:rotate(18deg)">
-    <div class="wine-card">
-      <h2>Lịch trình ngày cưới</h2>
-      <div class="wc-timeline" id="schedule"></div>
-    </div>
-  </div>
-
   <!-- ================= SỔ LƯU BÚT ================= -->
   <section class="section" id="guestbook" style="padding-top:44px">
     <div class="eyebrow-line">SỔ LƯU BÚT</div>
@@ -753,8 +752,10 @@
   </section>
 
   <section class="closing">
+    <img class="wc-flora" src="https://storage.hoangphi-kieumy.site/anh_nha_gai/flower2-decoration.webp" alt="" style="right:-10%;top:-16%;transform:rotate(16deg)">
     <div class="script">Cảm ơn</div>
-    <p>Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi.</p>
+    <div class="closing-orn" aria-hidden="true"><span></span>♥<span></span></div>
+    <p>Hạnh phúc sẽ chẳng thể trọn vẹn nếu thiếu vắng những người thân thương. Sự hiện diện của bạn hôm nay chính là đóa hoa tươi thắm nhất góp phần tô điểm cho ngày hạnh phúc của chúng mình. ❤️</p>
   </section>
 
 </div>
@@ -795,11 +796,6 @@ const CONFIG = {
   gallery:["https://storage.hoangphi-kieumy.site/anh_nha_gai/web/1.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/2.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/3.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/4.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/5.jpg",
            "https://storage.hoangphi-kieumy.site/anh_nha_gai/web/6.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/7.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/8.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/9.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/10.jpg",
            "https://storage.hoangphi-kieumy.site/anh_nha_gai/13.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/14.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/18.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/20.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/21.jpg",],
-
-  schedule:[
-    { time:"00:00", label:"Nhà trai khởi hành" },
-    { time:"06:00", label:"Cử hành hôn lễ tại tư gia", icon:"https://storage.hoangphi-kieumy.site/anh_nha_gai/camera.webp" },
-  ],
 
   guestbook:{
     scriptUrl:"https://script.google.com/macros/s/AKfycbzZW88dWKBNjm-83gDtrtz01tn6NyKrjLaFBJeFZ9JW_89q7OuN0WZJ2AiewSvRF5dyuA/exec"
@@ -1024,14 +1020,6 @@ function closeLB(){ $("#lb").classList.remove("on"); document.body.style.overflo
 
   // ---- thêm vào lịch (Google Calendar) ----
   $("#btnCal").href = gcalUrl();
-
-  // ---- lịch trình ngày cưới ----
-  $("#schedule").innerHTML = CONFIG.schedule.map((s, i, arr) => `
-    <div class="t-item" style="display:contents">
-      <span class="t-time">${s.icon ? `<img src="${esc(s.icon)}" alt="">` : ""}${esc(s.time)}</span>
-      <span class="t-dot"><span></span></span>
-      <span class="t-label">${esc(s.label)}</span>
-    </div>`).join("");
 
   $("#wSend").onclick = sendWish;
 
