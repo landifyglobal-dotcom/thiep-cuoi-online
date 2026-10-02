@@ -313,12 +313,20 @@
 
   /* lời mời cá nhân hoá theo link khách */
   .guest-line{
-    margin-top:10px;
-    font-family:var(--font-display);
-    font-style:italic;
-    font-size:16px;
-    color:var(--wine-deep);
-    min-height:22px;
+    position:relative; z-index:2;
+    margin:22px auto 0; max-width:320px; padding:14px 18px 16px;
+    border-top:1px solid rgba(201,161,90,.6);
+    border-bottom:1px solid rgba(201,161,90,.6);
+  }
+  .guest-line:empty{ display:none; }
+  .guest-line .gl-lead{
+    display:block; font-family:var(--font-display); font-size:12px;
+    letter-spacing:.32em; text-transform:uppercase; color:var(--gold);
+  }
+  .guest-line .gl-name{
+    display:block; margin-top:6px;
+    font-family:var(--font-display); font-style:italic; font-weight:600;
+    font-size:clamp(24px,7.5vw,30px); line-height:1.3; color:var(--wine-deep);
   }
 
   /* ================= khối chung ================= */
@@ -1188,7 +1196,7 @@ function closeLB(){ $("#lb").classList.remove("on"); document.body.style.overflo
       if (cvGuest) cvGuest.textContent = n;
       const note = (g.loi_nhan || "").trim(), cvNote = $("#cvNote");
       if (note && cvNote){ cvNote.textContent = note; cvNote.hidden = false; }
-      $("#guestLine").textContent = "Thân mời " + n;
+      $("#guestLine").innerHTML = `<span class="gl-lead">Thân mời</span><span class="gl-name">${esc(n)}</span>`;
       guestCode = (g.ma || "").trim();
       const wn = $("#wName"); if (wn && !wn.value) wn.value = n;
       document.title = `${n} — Thiệp mời ${CONFIG.bride.short} & ${CONFIG.groom.short}`;
