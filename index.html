@@ -321,7 +321,7 @@
   .guest-line:empty{ display:none; }
   .guest-line .gl-lead{
     display:block; font-family:var(--font-display); font-size:12px;
-    letter-spacing:.32em; text-transform:uppercase; color:var(--gold);
+    letter-spacing:.32em; text-transform:uppercase; color:var(--wine-deep);
   }
   .guest-line .gl-name{
     display:block; margin-top:6px;
@@ -457,7 +457,7 @@
   .closing > *{ position:relative; z-index:3; }
   .closing .wc-flora{ position:absolute; z-index:1; width:26%; }
   .closing .script{
-    font-family:var(--font-script); font-size:54px; line-height:1.1;
+    font-family:var(--font-script); font-size:clamp(32px,9.5vw,40px); line-height:1.2;
     color:var(--gold-soft); text-shadow:0 2px 12px rgba(201,161,90,.35);
   }
   .closing-orn{ display:flex; align-items:center; justify-content:center; gap:10px; margin:14px auto 16px; color:var(--gold); font-size:13px; }
@@ -484,11 +484,6 @@
     background:var(--wine); color:var(--cream); font-size:12px;
     letter-spacing:.14em; text-transform:uppercase;
   }
-  .gb-wall{ max-width:330px; margin:24px auto 0; text-align:left; display:grid; gap:8px; }
-  .gb-wish{ background:rgba(255,255,255,.55); border:1px solid rgba(111,15,28,.25); color:var(--ink); border-radius:8px; padding:12px 15px; }
-  .gb-wish b{ display:block; font-family:var(--font-display); font-size:14px; color:var(--wine); }
-  .gb-wish p{ font-size:13px; margin-top:3px; white-space:pre-wrap; }
-  .gb-empty{ font-size:12.5px; font-style:italic; color:var(--wine-soft); }
 
   /* ================= ALBUM — coverflow carousel ================= */
   .album{
@@ -668,7 +663,7 @@
         <div class="vr"></div>
         <div class="wc-fam"><small>Ông Bà</small><b>Lê Thành Sơn</b><b>Tô Thị Hồng Đẹp</b><em>Ấp Ninh Thuận, Xã Ninh Quới, Tỉnh Cà Mau</em></div>
       </div>
-      <p class="wc-tell">Trân trọng kính mời đến dự buổi tiệc cưới của gia đình chúng tôi<br></p>
+      <p class="wc-tell">Trân trọng thân mời mời đến dự buổi tiệc cưới của gia đình chúng tôi<br></p>
       <div class="wc-names">
         <h3>Đặng Thị Kiều My</h3><div class="role">Trưởng Nữ</div>
         <div class="amp">&amp;</div>
@@ -712,7 +707,7 @@
     <img class="wc-flora" src="https://storage.hoangphi-kieumy.site/anh_nha_gai/flower2-decoration.webp" alt="" style="left:-15%;top:-6%;transform:rotate(-16deg)">
     <div class="wine-card">
       <h2>Tiệc cưới sẽ diễn ra vào lúc</h2>
-      <div class="wc-time" style="margin-top:16px"><span>Thứ Ba</span><span>15:30</span></div>
+      <div class="wc-time" style="margin-top:16px"><span>Thứ Ba</span><span>16:30</span></div>
       <div class="wc-date">
         <span class="day">03</span>
         <div class="dv"></div>
@@ -720,8 +715,8 @@
       </div>
       <div class="wc-lunar">(Tức ngày 25 tháng 09 năm Bính Ngọ)</div>
       <div class="wc-slots">
-        <div><small>Đón khách</small><b>15:00</b></div>
-        <div><small>Khai tiệc</small><b>15:30</b></div>
+        <div><small>Đón khách</small><b>16:30</b></div>
+        <div><small>Khai tiệc</small><b>17:00</b></div>
       </div>
       <div class="wc-cal" id="calWidget"></div>
       <div class="wc-countdown" id="countdown">
@@ -756,12 +751,11 @@
       <textarea id="wMsg" placeholder="Gửi đôi lời chúc mừng…" maxlength="500"></textarea>
       <button id="wSend">Gửi lời chúc</button>
     </div>
-    <div class="gb-wall" id="wall"><p class="gb-empty">Chưa có lời chúc nào. Hãy là người đầu tiên!</p></div>
   </section>
 
   <section class="closing">
     <img class="wc-flora" src="https://storage.hoangphi-kieumy.site/anh_nha_gai/flower2-decoration.webp" alt="" style="right:-10%;top:-16%;transform:rotate(16deg)">
-    <div class="script">Cảm ơn</div>
+    <div class="script">Trân trọng thân mời</div>
     <div class="closing-orn" aria-hidden="true"><span></span>♥<span></span></div>
     <p>Hạnh phúc sẽ chẳng thể trọn vẹn nếu thiếu vắng những người thân thương. Sự hiện diện của bạn hôm nay chính là đóa hoa tươi thắm nhất góp phần tô điểm cho ngày hạnh phúc của chúng mình. ❤️</p>
   </section>
@@ -801,7 +795,7 @@ const CONFIG = {
   ],
   autoplay:true,   // nhạc tự chạy ngay khi khách bấm "Mở thiệp"
 
-  gallery:["https://storage.hoangphi-kieumy.site/anh_nha_gai/web/1.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/2.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/3.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/4.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/5.jpg",
+  gallery:["https://storage.hoangphi-kieumy.site/anh_nha_gai/web/2.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/1.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/4.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/5.jpg",
            "https://storage.hoangphi-kieumy.site/anh_nha_gai/web/6.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/7.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/8.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/9.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/web/10.jpg",
            "https://storage.hoangphi-kieumy.site/anh_nha_gai/13.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/14.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/18.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/20.jpg","https://storage.hoangphi-kieumy.site/anh_nha_gai/21.jpg",],
 
@@ -851,30 +845,15 @@ async function readSheet(id, name){
 }
 
 let guestCode = "";
-function wishesFromGuests(guests){
-  return guests.map(g => ({
-    name: [g.xung_ho, g.ten].filter(Boolean).join(" ") || "Ẩn danh",
-    msg: (g.loi_chuc_tu_khach || "").trim()
-  })).filter(x => x.msg);
-}
-function paintWishes(list){
-  const w = $("#wall");
-  if (!list.length) { w.innerHTML = `<p class="gb-empty">Chưa có lời chúc nào. Hãy là người đầu tiên!</p>`; return; }
-  w.innerHTML = list.slice().reverse().map(x =>
-    `<div class="gb-wish"><b>${esc(x.name)}</b><p>${esc(x.msg)}</p></div>`).join("");
-}
 function sendWish(){
   const gb = CONFIG.guestbook;
-  const name = $("#wName").value.trim(), msg = $("#wMsg").value.trim();
+  const msg = $("#wMsg").value.trim();
   const btn = $("#wSend");
   if (!msg) { $("#wMsg").focus(); return; }
   if (!guestCode) { btn.textContent = "Cần mở bằng link mời riêng"; setTimeout(() => btn.textContent = "Gửi lời chúc", 2600); return; }
   if (!gb.scriptUrl) { btn.textContent = "Chưa cấu hình"; setTimeout(() => btn.textContent = "Gửi lời chúc", 2200); return; }
   fetch(gb.scriptUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify({ ma: guestCode, loi_chuc: msg }) }).catch(() => {});
-  const w = $("#wall");
-  if (w.querySelector(".gb-empty")) w.innerHTML = "";
-  w.insertAdjacentHTML("afterbegin", `<div class="gb-wish"><b>${esc(name || "Ẩn danh")}</b><p>${esc(msg)}</p></div>`);
   $("#wMsg").value = "";
   btn.textContent = "Đã gửi ✓"; setTimeout(() => btn.textContent = "Gửi lời chúc", 2200);
 }
@@ -1203,7 +1182,6 @@ function closeLB(){ $("#lb").classList.remove("on"); document.body.style.overflo
     }
 
     if (cvGuest) cvGuest.classList.remove("loading");
-    paintWishes(wishesFromGuests(guests));
   })();
 })();
 </script>
